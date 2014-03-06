@@ -40,7 +40,7 @@ public class IndexController {
 
     @RequestMapping(value = "/file/{parameter}", method = RequestMethod.GET)
     @ResponseBody
-    public List<SoftwareFile> getAllTest(@PathVariable String parameter) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public List<SoftwareFile> getAllFilter(@PathVariable String parameter) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 
         List<SoftwareFile> boxSoftware = fileRepository.findAll();
 
@@ -48,5 +48,11 @@ public class IndexController {
         jsonMappingFilter.filter(boxSoftware, UriOptions.parse(parameter));
 
         return boxSoftware;
+    }
+
+    @RequestMapping(value = "/file/", method = RequestMethod.GET)
+    @ResponseBody
+    public List<SoftwareFile> getAll() {
+        return fileRepository.findAll();
     }
 }
